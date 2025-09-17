@@ -146,12 +146,18 @@ export default function Dashboard() {
                 <Button variant="ghost" className="relative h-9 w-9 rounded-full">
                   <Avatar className="h-9 w-9 border-2 border-transparent hover:border-primary transition-colors">
                     <AvatarImage src="/placeholder.svg?height=36&width=36" alt="User" />
-                    <AvatarFallback>U</AvatarFallback>
+                    <AvatarFallback>
+                      {session?.user?.name ? session.user.name.charAt(0).toUpperCase() : 'U'}
+                    </AvatarFallback>
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuLabel>マイアカウント</DropdownMenuLabel>
+                <DropdownMenuLabel>
+                  <p className="text-sm font-bold leading-none">
+                    {session?.user?.name || 'ユーザー'}
+                  </p>
+                </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>プロフィール</DropdownMenuItem>
                 <DropdownMenuItem>設定</DropdownMenuItem>
