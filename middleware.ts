@@ -10,7 +10,7 @@ export default withAuth(
         const { pathname } = req.nextUrl
 
         // Public routes that don't require authentication
-        const publicRoutes = ['/auth/login']
+        const publicRoutes = ['/auth/login', '/auth/register']
 
         if (publicRoutes.includes(pathname)) {
           return true
@@ -25,7 +25,7 @@ export default withAuth(
 
 export const config = {
   matcher: [
-    // Match all routes except static files and API auth routes
-    '/((?!api/auth|_next/static|_next/image|favicon.ico).*)',
+    // Match all routes except static files, API auth routes, and registration API
+    '/((?!api/auth|api/.*|_next/static|_next/image|favicon.ico).*)',
   ],
 }
