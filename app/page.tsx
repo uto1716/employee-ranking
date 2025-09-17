@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { useSession, signOut } from "next-auth/react"
 import {
   Bell,
   Award,
@@ -38,6 +39,11 @@ import { useState } from "react"
 
 export default function Dashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+  const { data: session, status } = useSession()
+
+  const handleLogout = () => {
+    signOut({ callbackUrl: '/auth/login' })
+  }
 
   return (
     <div className="flex min-h-screen w-full bg-background">
@@ -150,7 +156,7 @@ export default function Dashboard() {
                 <DropdownMenuItem>プロフィール</DropdownMenuItem>
                 <DropdownMenuItem>設定</DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>ログアウト</DropdownMenuItem>
+                <DropdownMenuItem onClick={handleLogout}>ログアウト</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
