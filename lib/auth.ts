@@ -3,15 +3,21 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import { createClient } from '@supabase/supabase-js'
 import bcrypt from 'bcryptjs'
 
-// Initialize Supabase admin client with environment variables
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
-
-if (!supabaseUrl || !supabaseServiceKey) {
-  throw new Error('Missing Supabase environment variables')
+// Environment variable checker
+function required(name: string) {
+  const v = process.env[name];
+  if (!v) {
+    console.error(`Missing env: ${name}`);
+    throw new Error(`Missing env: ${name}`);
+  }
+  return v;
 }
 
-const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey)
+// Initialize Supabase admin client with environment variables
+const supabaseAdmin = createClient(
+  required('NEXT_PUBLIC_SUPABASE_URL'),
+  required('SUPABASE_SERVICE_ROLE_KEY')
+)
 
 export const authOptions: NextAuthOptions = {
   providers: [
