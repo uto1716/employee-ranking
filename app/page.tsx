@@ -154,16 +154,9 @@ export default function Dashboard() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
                 <DropdownMenuLabel>
-                  <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium leading-none">
-                      {session?.user?.name || 'ユーザー'}
-                    </p>
-                    {(session?.user as any)?.role && (
-                      <p className="text-xs leading-none text-muted-foreground">
-                        {(session?.user as any)?.role === 'admin' ? '管理者' : 'ユーザー'}
-                      </p>
-                    )}
-                  </div>
+                  <p className="text-sm font-bold leading-none">
+                    {session?.user?.name || 'ユーザー'}
+                  </p>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>プロフィール</DropdownMenuItem>
