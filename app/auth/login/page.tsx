@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { signIn, getSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -32,7 +33,6 @@ export default function LoginPage() {
       if (result?.error) {
         setError('メールアドレスまたはパスワードが正しくありません')
       } else {
-        // Get session to check user role
         const session = await getSession()
         if (session?.user) {
           router.push('/')
@@ -106,9 +106,16 @@ export default function LoginPage() {
             </Button>
           </form>
 
-          <div className="mt-6 text-sm text-muted-foreground text-center">
-            <div className="p-3 bg-muted rounded-lg">
-              <p className="font-medium mb-1">デモアカウント:</p>
+          <div className="mt-6 text-center">
+            <p className="text-sm text-muted-foreground mb-4">
+              アカウントをお持ちでないですか？{' '}
+              <Link href="/auth/register" className="text-primary hover:underline">
+                新規登録
+              </Link>
+            </p>
+
+            <div className="p-3 bg-muted rounded-lg text-sm text-muted-foreground">
+              <p className="font-medium mb-1">デモ管理者アカウント:</p>
               <p>Email: admin@example.com</p>
               <p>Password: admin123</p>
             </div>

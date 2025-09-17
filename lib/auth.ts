@@ -28,9 +28,18 @@ export const authOptions: NextAuthOptions = {
             return null
           }
 
-          // For demo purposes, we'll create a simple password check
-          // In production, you'd verify against hashed password
-          if (credentials.password === 'admin123' && user.role === 'admin') {
+          // Check password
+          let isValidPassword = false
+
+          if (user.password_hash) {
+            // Verify hashed password for new users
+            isValidPassword = await bcrypt.compare(credentials.password, user.password_hash)
+          } else {
+            // Fallback for admin account without hashed password (demo)
+            isValidPassword = credentials.password === 'admin123' && user.role === 'admin'
+          }
+
+          if (isValidPassword) {
             return {
               id: user.id,
               email: user.email,
