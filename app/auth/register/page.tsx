@@ -24,7 +24,7 @@ export default function RegisterPage() {
 
   const validateForm = () => {
     if (!formData.name.trim()) {
-      setError('名前を入力してください')
+      setError('ユーザー名を入力してください')
       return false
     }
     if (!formData.email.trim()) {
@@ -135,7 +135,7 @@ export default function RegisterPage() {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name">名前</Label>
+              <Label htmlFor="name">ユーザー名</Label>
               <Input
                 id="name"
                 type="text"
@@ -143,7 +143,7 @@ export default function RegisterPage() {
                 onChange={(e) => handleInputChange('name', e.target.value)}
                 required
                 disabled={loading}
-                placeholder="山田 太郎"
+                placeholder="yamada_taro"
               />
             </div>
 
