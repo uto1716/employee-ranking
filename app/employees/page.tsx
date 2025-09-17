@@ -1,5 +1,6 @@
 "use client"
 
+import { useSession } from 'next-auth/react'
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu"
 
 import Link from "next/link"
@@ -99,11 +100,21 @@ const allEmployees = [
 ]
 
 export default function EmployeesPage() {
+  const { data: session, status } = useSession()
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
   const [searchTerm, setSearchTerm] = useState("")
   const [departmentFilter, setDepartmentFilter] = useState<string[]>([])
 
   const departments = Array.from(new Set(allEmployees.map((e) => e.department)))
+
+  // Loading state while checking authentication
+  if (status === 'loading') {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div>読み込み中...</div>
+      </div>
+    )
+  }
 
   const filteredEmployees = allEmployees.filter((employee) => {
     const matchesSearch =
