@@ -56,12 +56,26 @@ export const authOptions: NextAuthOptions = {
           }
 
           if (isValidPassword) {
+            // Determine user_type from name field (temporary solution)
+            let user_type = 'personal'
+            let cleanName = user.name
+
+            if (user.name.includes('[CORPORATE]')) {
+              user_type = 'corporate'
+              cleanName = user.name.replace(' [CORPORATE]', '')
+            } else if (user.name.includes('[PERSONAL]')) {
+              user_type = 'personal'
+              cleanName = user.name.replace(' [PERSONAL]', '')
+            } else if (user.role === 'admin') {
+              user_type = 'admin'
+            }
+
             return {
               id: user.id,
               email: user.email,
-              name: user.name,
+              name: cleanName,
               role: user.role,
-              user_type: user.user_type || (user.role === 'admin' ? 'admin' : 'personal'),
+              user_type: user_type,
             }
           }
 
@@ -76,21 +90,21 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.role = (user as any).role || 'user'
-        token.user_type = (user as any).user_type || ((user as any).role === 'admin' ? 'admin' : 'personal')
+        token.role = (user as any).role || 'user';
+        token.user_type = (user as any).user_type || ((user as any).role === 'admin' ? 'admin' : 'personal');
       }
-      return token
+      return token;
     },
     async session({ session, token }) {
       if (session.user && token) {
-        (session.user as any).role = token.role || 'user'
-        (session.user as any).user_type = token.user_type || 'personal'
+        (session.user as any).role = token.role || 'user';
+        (session.user as any).user_type = token.user_type || 'personal';
       }
-      return session
+      return session;
     }
   },
   pages: {
-    signIn: '/auth/login',
+    signIn: '/auth/signin',
   },
   session: {
     strategy: 'jwt',

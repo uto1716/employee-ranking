@@ -42,7 +42,7 @@ export default function Dashboard() {
   const { data: session, status } = useSession()
 
   const handleLogout = () => {
-    signOut({ callbackUrl: '/auth/login' })
+    signOut({ callbackUrl: '/auth/signin' })
   }
 
   return (
