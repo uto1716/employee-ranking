@@ -16,11 +16,6 @@ export default function LandingPage() {
               <Megaphone className="h-8 w-8 text-blue-600" />
               <span className="text-2xl font-bold text-gray-900">エンタ</span>
             </div>
-            <div className="flex items-center gap-4">
-              <Link href="/auth/login" className="text-gray-600 hover:text-gray-900">
-                統合ログイン
-              </Link>
-            </div>
           </div>
         </div>
       </header>
@@ -28,12 +23,16 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="container mx-auto text-center">
-          <h1 className="text-5xl font-bold text-gray-900 mb-6">
-            アフィリエイト<span className="text-blue-600">広告</span>サービス
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+            <span className="block sm:inline">アフィリエイト</span>
+            <span className="text-blue-600">広告</span>
+            <span className="inline">サービス</span>
           </h1>
-          <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
-            企業とアフィリエイターを繋ぐ、次世代のマーケティングプラットフォーム。
-            A8.netのような成果報酬型広告で、効果的なビジネス成長を実現します。
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-12 max-w-3xl mx-auto px-4">
+            企業とアフィリエイターを繋ぐ、<br className="sm:hidden" />
+            次世代のマーケティングプラットフォーム。<br className="hidden sm:block" />
+            A8.netのような成果報酬型広告で、<br className="sm:hidden" />
+            効果的なビジネス成長を実現します。
           </p>
 
           {/* Login Type Selection */}
