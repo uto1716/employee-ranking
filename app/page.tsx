@@ -167,7 +167,7 @@ export default function LandingPage() {
       <footer className="bg-gray-900 text-white py-8">
         <div className="container mx-auto px-4 text-center">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <LayoutGrid className="h-6 w-6" />
+            <Megaphone className="h-6 w-6" />
             <span className="text-xl font-bold">エンタ</span>
           </div>
           <p className="text-gray-400">
