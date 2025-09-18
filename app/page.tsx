@@ -28,12 +28,6 @@ export default function LandingPage() {
             <span className="text-blue-600">広告</span>
             <span className="inline">サービス</span>
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-12 max-w-3xl mx-auto px-4">
-            企業とアフィリエイターを繋ぐ、<br className="sm:hidden" />
-            次世代のマーケティングプラットフォーム。<br className="hidden sm:block" />
-            A8.netのような成果報酬型広告で、<br className="sm:hidden" />
-            効果的なビジネス成長を実現します。
-          </p>
 
           {/* Login Type Selection */}
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
