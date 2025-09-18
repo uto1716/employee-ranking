@@ -57,7 +57,7 @@ export default function Dashboard() {
           </div>
           <nav className="flex-1 space-y-1.5 p-4">
             <Link
-              href="/"
+              href="/dashboard"
               className="flex items-center gap-3 rounded-lg bg-primary/10 px-3 py-2.5 text-primary font-medium transition-all hover:bg-primary/20"
             >
               <Home className="h-5 w-5" />
