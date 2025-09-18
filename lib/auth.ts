@@ -61,7 +61,7 @@ export const authOptions: NextAuthOptions = {
               email: user.email,
               name: user.name,
               role: user.role,
-              user_type: user.user_type,
+              user_type: user.user_type || (user.role === 'admin' ? 'admin' : 'personal'),
             }
           }
 
@@ -76,15 +76,15 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.role = (user as any).role
-        token.user_type = (user as any).user_type
+        token.role = (user as any).role || 'user'
+        token.user_type = (user as any).user_type || ((user as any).role === 'admin' ? 'admin' : 'personal')
       }
       return token
     },
     async session({ session, token }) {
-      if (session.user) {
-        (session.user as any).role = token.role
-        (session.user as any).user_type = token.user_type
+      if (session.user && token) {
+        (session.user as any).role = token.role || 'user'
+        (session.user as any).user_type = token.user_type || 'personal'
       }
       return session
     }
