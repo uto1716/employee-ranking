@@ -16,7 +16,7 @@ import {
   ChevronRight,
   PlusCircle,
   Search,
-  LayoutGrid,
+  Megaphone,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -51,7 +51,7 @@ export default function Dashboard() {
         <aside className="fixed inset-y-0 left-0 z-20 hidden w-64 flex-col border-r bg-card sm:flex">
           <div className="flex h-16 items-center border-b px-6">
             <Link href="/" className="flex items-center gap-2 font-bold text-lg text-primary">
-              <LayoutGrid className="h-7 w-7" />
+              <Megaphone className="h-7 w-7" />
               <span>エンタ</span>
             </Link>
           </div>

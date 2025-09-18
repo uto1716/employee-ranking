@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Building2, User, LayoutGrid, ArrowRight } from 'lucide-react'
+import { Building2, User, Megaphone, ArrowRight } from 'lucide-react'
 
 export default function SignInPage() {
   return (
@@ -12,7 +12,7 @@ export default function SignInPage() {
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
             <div className="flex items-center gap-2">
-              <LayoutGrid className="h-8 w-8 text-blue-600" />
+              <Megaphone className="h-8 w-8 text-blue-600" />
               <span className="text-2xl font-bold text-gray-900">エンタ</span>
             </div>
           </div>
