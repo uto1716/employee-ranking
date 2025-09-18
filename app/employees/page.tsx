@@ -136,7 +136,7 @@ export default function EmployeesPage() {
           </div>
           <nav className="flex-1 space-y-1.5 p-4">
             <Link
-              href="/"
+              href="/dashboard"
               className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-muted-foreground transition-all hover:text-primary hover:bg-primary/10"
             >
               <Home className="h-5 w-5" />

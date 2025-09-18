@@ -35,7 +35,7 @@ export default function TasksPage() {
           </div>
           <nav className="flex-1 space-y-1 p-4">
             <Link
-              href="/"
+              href="/dashboard"
               className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
             >
               <Home className="h-4 w-4" />
