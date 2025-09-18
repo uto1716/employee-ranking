@@ -5,7 +5,17 @@ import bcrypt from 'bcryptjs'
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { name, email, password } = body
+    const {
+      name,
+      email,
+      password,
+      user_type = 'personal',
+      representative,
+      business_type,
+      website,
+      nickname,
+      social_media
+    } = body
 
     // Validation
     if (!name || !email || !password) {
@@ -49,14 +59,25 @@ export async function POST(request: NextRequest) {
     const hashedPassword = await bcrypt.hash(password, saltRounds)
 
     // Create user in database
+    // Note: Using only existing columns for now until database is updated
+    const userData: any = {
+      name: name.trim(),
+      email: email.toLowerCase().trim(),
+      password_hash: hashedPassword,
+      role: 'user', // Default role for new users
+    }
+
+    // Store user_type and additional info in name field temporarily
+    // Format: "Company Name [CORPORATE]" or "User Name [PERSONAL]"
+    if (user_type === 'corporate') {
+      userData.name = `${name.trim()} [CORPORATE]`
+    } else {
+      userData.name = `${name.trim()} [PERSONAL]`
+    }
+
     const { data: newUser, error: createError } = await supabaseAdmin
       .from('users')
-      .insert({
-        name: name.trim(),
-        email: email.toLowerCase().trim(),
-        password_hash: hashedPassword,
-        role: 'user', // Default role for new users
-      })
+      .insert(userData)
       .select()
       .single()
 

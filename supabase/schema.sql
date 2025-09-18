@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS public.users (
     email VARCHAR(255) UNIQUE NOT NULL,
     name VARCHAR(255),
     role VARCHAR(20) DEFAULT 'user' CHECK (role IN ('admin', 'user')),
+    user_type VARCHAR(20) DEFAULT 'personal' CHECK (user_type IN ('corporate', 'personal', 'admin')),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
@@ -26,8 +27,8 @@ CREATE TABLE IF NOT EXISTS public.employees (
 );
 
 -- Insert default admin user
-INSERT INTO public.users (email, name, role)
-VALUES ('admin@example.com', '管理者', 'admin')
+INSERT INTO public.users (email, name, role, user_type)
+VALUES ('admin@example.com', '管理者', 'admin', 'admin')
 ON CONFLICT (email) DO NOTHING;
 
 -- Insert sample employees

@@ -1,276 +1,182 @@
-"use client"
+'use client'
 
-import Link from "next/link"
-import { useSession, signOut } from "next-auth/react"
-import {
-  Bell,
-  Award,
-  DollarSign,
-  Briefcase,
-  Users,
-  ClipboardList,
-  LineChart,
-  Home,
-  Settings,
-  ChevronLeft,
-  ChevronRight,
-  PlusCircle,
-  Search,
-  LayoutGrid,
-} from "lucide-react"
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Building2, User, LayoutGrid, ArrowRight, TrendingUp, Shield, Zap } from 'lucide-react'
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { EmployeeRankingTable } from "@/components/employee-ranking-table"
-import { RecentTasks } from "@/components/recent-tasks"
-import { TaskNotifications } from "@/components/task-notifications"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Input } from "@/components/ui/input"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { useState } from "react"
-
-export default function Dashboard() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true)
-  const { data: session, status } = useSession()
-
-  const handleLogout = () => {
-    signOut({ callbackUrl: '/auth/login' })
-  }
-
+export default function LandingPage() {
   return (
-    <div className="flex min-h-screen w-full bg-background">
-      {isSidebarOpen && (
-        <aside className="fixed inset-y-0 left-0 z-20 hidden w-64 flex-col border-r bg-card sm:flex">
-          <div className="flex h-16 items-center border-b px-6">
-            <Link href="/" className="flex items-center gap-2 font-bold text-lg text-primary">
-              <LayoutGrid className="h-7 w-7" />
-              <span>エンタ</span>
-            </Link>
-          </div>
-          <nav className="flex-1 space-y-1.5 p-4">
-            <Link
-              href="/"
-              className="flex items-center gap-3 rounded-lg bg-primary/10 px-3 py-2.5 text-primary font-medium transition-all hover:bg-primary/20"
-            >
-              <Home className="h-5 w-5" />
-              ダッシュボード
-            </Link>
-            <Link
-              href="/tasks"
-              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-muted-foreground transition-all hover:text-primary hover:bg-primary/10"
-            >
-              <ClipboardList className="h-5 w-5" />
-              業務管理
-            </Link>
-            <Link
-              href="/employees"
-              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-muted-foreground transition-all hover:text-primary hover:bg-primary/10"
-            >
-              <Users className="h-5 w-5" />
-              社員一覧
-            </Link>
-            <Link
-              href="/reports"
-              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-muted-foreground transition-all hover:text-primary hover:bg-primary/10"
-            >
-              <LineChart className="h-5 w-5" />
-              レポート
-            </Link>
-          </nav>
-          <div className="mt-auto p-4 border-t">
-            <Link
-              href="/settings"
-              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-muted-foreground transition-all hover:text-primary hover:bg-primary/10"
-            >
-              <Settings className="h-5 w-5" />
-              設定
-            </Link>
-          </div>
-        </aside>
-      )}
-
-      <div className={`flex flex-1 flex-col ${isSidebarOpen ? "sm:pl-64" : ""}`}>
-        <header className="sticky top-0 z-10 flex h-16 items-center justify-between gap-4 border-b bg-background/80 backdrop-blur-md px-4 sm:px-6">
-          <div className="flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="sm:hidden text-muted-foreground"
-              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            >
-              {isSidebarOpen ? <ChevronLeft className="h-5 w-5" /> : <ChevronRight className="h-5 w-5" />}
-              <span className="sr-only">Toggle sidebar</span>
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="hidden sm:inline-flex text-muted-foreground"
-              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            >
-              {isSidebarOpen ? <ChevronLeft className="h-5 w-5" /> : <ChevronRight className="h-5 w-5" />}
-              <span className="sr-only">Toggle sidebar</span>
-            </Button>
-            <div className="relative flex-1 md:grow-0">
-              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="全体検索..."
-                className="w-full rounded-lg bg-muted pl-8 md:w-[280px] lg:w-[380px] focus:shadow-focus"
-              />
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+      {/* Header */}
+      <header className="border-b bg-white/80 backdrop-blur-md">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <LayoutGrid className="h-8 w-8 text-blue-600" />
+              <span className="text-2xl font-bold text-gray-900">エンタ</span>
+            </div>
+            <div className="flex items-center gap-4">
+              <Link href="/auth/login" className="text-gray-600 hover:text-gray-900">
+                統合ログイン
+              </Link>
             </div>
           </div>
+        </div>
+      </header>
 
-          <div className="flex items-center gap-3">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="relative rounded-full text-muted-foreground hover:text-primary"
-            >
-              <Bell className="h-5 w-5" />
-              <span className="absolute right-0 top-0 flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
-              </span>
-              <span className="sr-only">通知</span>
-            </Button>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-9 w-9 rounded-full">
-                  <Avatar className="h-9 w-9 border-2 border-transparent hover:border-primary transition-colors">
-                    <AvatarImage src="/placeholder.svg?height=36&width=36" alt="User" />
-                    <AvatarFallback>
-                      {session?.user?.name ? session.user.name.charAt(0).toUpperCase() : 'U'}
-                    </AvatarFallback>
-                  </Avatar>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuLabel>
-                  <p className="text-sm font-bold leading-none">
-                    {session?.user?.name || 'ユーザー'}
-                  </p>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>プロフィール</DropdownMenuItem>
-                <DropdownMenuItem>設定</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleLogout}>ログアウト</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-        </header>
+      {/* Hero Section */}
+      <section className="py-20 px-4">
+        <div className="container mx-auto text-center">
+          <h1 className="text-5xl font-bold text-gray-900 mb-6">
+            アフィリエイト
+            <span className="text-blue-600">マーケティング</span>
+            プラットフォーム
+          </h1>
+          <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+            企業とアフィリエイターを繋ぐ、次世代のマーケティングプラットフォーム。
+            A8.netのような成果報酬型広告で、効果的なビジネス成長を実現します。
+          </p>
 
-        <main className="flex-1 space-y-6 p-2 sm:p-4 md:p-6 lg:p-8">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <h1 className="text-3xl font-bold tracking-tight">ダッシュボード</h1>
-            <Button size="lg" className="shadow-sm hover:shadow-md transition-shadow">
-              <PlusCircle className="mr-2 h-5 w-5" />
-              新規業務作成
-            </Button>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="shadow-subtle hover:shadow-lg transition-shadow duration-300">
-              <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-                <CardTitle className="text-sm font-medium text-muted-foreground">総業務件数 (今月)</CardTitle>
-                <Briefcase className="h-5 w-5 text-primary" />
+          {/* Login Type Selection */}
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
+            {/* Corporate Login */}
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-2 hover:border-blue-500 bg-white">
+              <CardHeader className="text-center pb-4">
+                <div className="flex justify-center mb-4">
+                  <div className="p-4 bg-blue-100 rounded-full group-hover:bg-blue-200 transition-colors">
+                    <Building2 className="h-12 w-12 text-blue-600" />
+                  </div>
+                </div>
+                <CardTitle className="text-2xl text-gray-900">企業・広告主</CardTitle>
+                <CardDescription className="text-gray-600">
+                  商品・サービスを宣伝したい企業様
+                </CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold">1,248</div>
-                <p className="text-xs text-green-600">+12.5% 先月比</p>
+              <CardContent className="space-y-4">
+                <div className="space-y-2 text-sm text-gray-600">
+                  <div className="flex items-center gap-2">
+                    <TrendingUp className="h-4 w-4 text-blue-600" />
+                    <span>成果報酬型広告の配信</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Shield className="h-4 w-4 text-blue-600" />
+                    <span>詳細な成果レポート</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Zap className="h-4 w-4 text-blue-600" />
+                    <span>リアルタイム分析</span>
+                  </div>
+                </div>
+                <Link href="/auth/corporate/login" className="block w-full">
+                  <Button className="w-full bg-blue-600 hover:bg-blue-700 group-hover:scale-105 transition-transform">
+                    企業ログイン
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+                <p className="text-xs text-center text-gray-500">
+                  <Link href="/auth/corporate/register" className="text-blue-600 hover:underline">
+                    企業登録はこちら
+                  </Link>
+                </p>
               </CardContent>
             </Card>
-            <Card className="shadow-subtle hover:shadow-lg transition-shadow duration-300">
-              <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-                <CardTitle className="text-sm font-medium text-muted-foreground">総売上金額 (今月)</CardTitle>
-                <DollarSign className="h-5 w-5 text-primary" />
+
+            {/* Personal Login */}
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-2 hover:border-green-500 bg-white">
+              <CardHeader className="text-center pb-4">
+                <div className="flex justify-center mb-4">
+                  <div className="p-4 bg-green-100 rounded-full group-hover:bg-green-200 transition-colors">
+                    <User className="h-12 w-12 text-green-600" />
+                  </div>
+                </div>
+                <CardTitle className="text-2xl text-gray-900">個人・アフィリエイター</CardTitle>
+                <CardDescription className="text-gray-600">
+                  商品を紹介して収益を得たい方
+                </CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold">¥3,456,789</div>
-                <p className="text-xs text-green-600">+8.2% 先月比</p>
-              </CardContent>
-            </Card>
-            <Card className="shadow-subtle hover:shadow-lg transition-shadow duration-300">
-              <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-                <CardTitle className="text-sm font-medium text-muted-foreground">トップ社員 (今月)</CardTitle>
-                <Award className="h-5 w-5 text-yellow-500" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">田中 太郎</div>
-                <p className="text-xs text-muted-foreground">ポイント: 1,250</p>
+              <CardContent className="space-y-4">
+                <div className="space-y-2 text-sm text-gray-600">
+                  <div className="flex items-center gap-2">
+                    <TrendingUp className="h-4 w-4 text-green-600" />
+                    <span>豊富な商品ラインナップ</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Shield className="h-4 w-4 text-green-600" />
+                    <span>透明な収益レポート</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Zap className="h-4 w-4 text-green-600" />
+                    <span>即座に始められる</span>
+                  </div>
+                </div>
+                <Link href="/auth/personal/login" className="block w-full">
+                  <Button className="w-full bg-green-600 hover:bg-green-700 group-hover:scale-105 transition-transform">
+                    個人ログイン
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+                <p className="text-xs text-center text-gray-500">
+                  <Link href="/auth/personal/register" className="text-green-600 hover:underline">
+                    個人登録はこちら
+                  </Link>
+                </p>
               </CardContent>
             </Card>
           </div>
+        </div>
+      </section>
 
-          <Tabs defaultValue="ranking" className="mt-6">
-            <TabsList className="flex flex-row space-x-1 rounded-md bg-muted p-1 text-muted-foreground mb-4 overflow-x-auto">
-              <TabsTrigger
-                value="ranking"
-                className="flex-shrink-0 justify-center whitespace-nowrap rounded-sm px-3 py-2 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md"
-              >
-                社員ランキング
-              </TabsTrigger>
-              <TabsTrigger
-                value="tasks"
-                className="flex-shrink-0 justify-center whitespace-nowrap rounded-sm px-3 py-2 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md"
-              >
-                最近の業務
-              </TabsTrigger>
-              <TabsTrigger
-                value="notifications"
-                className="flex-shrink-0 justify-center whitespace-nowrap rounded-sm px-3 py-2 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md"
-              >
-                新着案件通知
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent value="ranking" className="mt-2">
-              {" "}
-              {/* Reduced margin for content when tabs are stacked */}
-              <Card className="shadow-subtle">
-                <CardHeader>
-                  <CardTitle>社員ランキング</CardTitle>
-                  <CardDescription>
-                    業務達成度に基づく社員のランキングです。クリックして社員詳細を確認できます。
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <EmployeeRankingTable />
-                </CardContent>
-              </Card>
-            </TabsContent>
-            <TabsContent value="tasks" className="mt-2">
-              <Card className="shadow-subtle">
-                <CardHeader>
-                  <CardTitle>最近の業務</CardTitle>
-                  <CardDescription>最近完了または進行中の業務の一覧です。</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <RecentTasks />
-                </CardContent>
-              </Card>
-            </TabsContent>
-            <TabsContent value="notifications" className="mt-2">
-              <Card className="shadow-subtle">
-                <CardHeader>
-                  <CardTitle>新着案件通知</CardTitle>
-                  <CardDescription>新しく登録された案件や重要な更新の通知です。</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <TaskNotifications />
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
-        </main>
-      </div>
+      {/* Features Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+            なぜエンタが選ばれるのか
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="p-4 bg-blue-100 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                <TrendingUp className="h-8 w-8 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">高い成果率</h3>
+              <p className="text-gray-600">
+                独自のマッチングアルゴリズムで、企業とアフィリエイターの最適な組み合わせを実現
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="p-4 bg-green-100 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                <Shield className="h-8 w-8 text-green-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">安心・安全</h3>
+              <p className="text-gray-600">
+                厳格な審査プロセスと透明な取引システムで、安心してご利用いただけます
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="p-4 bg-purple-100 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                <Zap className="h-8 w-8 text-purple-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">簡単スタート</h3>
+              <p className="text-gray-600">
+                直感的なインターフェースで、初心者でもすぐにアフィリエイトを始められます
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-8">
+        <div className="container mx-auto px-4 text-center">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <LayoutGrid className="h-6 w-6" />
+            <span className="text-xl font-bold">エンタ</span>
+          </div>
+          <p className="text-gray-400">
+            © 2024 エンタ. All rights reserved.
+          </p>
+        </div>
+      </footer>
     </div>
   )
 }
